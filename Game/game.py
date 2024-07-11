@@ -3,6 +3,7 @@ import mediapipe as mp
 import numpy as np
 import random
 import time
+import Game.avater as avater
 
 # MediaPipe Pose初期化
 mp_drawing = mp.solutions.drawing_utils
@@ -45,7 +46,8 @@ def game_loop(cap, window_name):
 
             # 結果を描画
             if results.pose_landmarks:
-                mp_drawing.draw_landmarks(frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+                avater.draw_avatar(frame, results.pose_landmarks.landmark)
+                #mp_drawing.draw_landmarks(frame, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
                 # 手の位置を取得
                 left_hand = results.pose_landmarks.landmark[mp_pose.PoseLandmark.LEFT_INDEX]
