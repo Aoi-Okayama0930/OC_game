@@ -1,6 +1,10 @@
 import cv2
 import time
 import numpy as np
+import setting
+
+halfwidth = setting.width//2
+halfheight = setting.height//2
 
 def countdown3(cap, window_name):
     start_time = time.time()
@@ -22,7 +26,7 @@ def countdown3(cap, window_name):
         # アニメーションの内容を描画
         alpha = elapsed_time / animation_duration
         overlay = frame.copy()
-        cv2.putText(overlay, '3', (150, 240), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10, cv2.LINE_AA)
+        cv2.putText(overlay, '3', (halfwidth, halfheight), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10, cv2.LINE_AA)
         cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
 
         cv2.imshow(window_name, frame)

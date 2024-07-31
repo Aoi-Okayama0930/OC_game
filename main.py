@@ -13,11 +13,11 @@ import Game.stage2_scene as s2
 import Game.stage3_scene as s3
 
 # BGMファイルのパス
-BGM_MENUE = 'c:/Users/81908/Desktop/研究室/OpenCanpus/OC_game/Music/free2.mp3'
-BGM_GAME = 'c:/Users/81908/Desktop/研究室/OpenCanpus/OC_game/Music/free1.mp3'
-SOUND_EFFECT_FINISH = 'c:/Users/81908/Desktop/研究室/OpenCanpus/OC_game/Music/Finish_SE.mp3'
-SOUND_EFFECT_TRANSITION = 'c:/Users/81908/Desktop/研究室/OpenCanpus/OC_game/Music/SE1.mp3'
-SOUND_EFFECT_TRANSITION2 = 'c:/Users/81908/Desktop/研究室/OpenCanpus/OC_game/Music/SE2.mp3'
+BGM_MENUE = 'c:/Users/Public/Documents/OC_game/Music/free2.mp3'
+BGM_GAME = 'c:/Users/Public/Documents/OC_game/Music/free1.mp3'
+SOUND_EFFECT_FINISH = 'c:/Users/Public/Documents/OC_game/Music/Finish_SE.mp3'
+SOUND_EFFECT_TRANSITION = 'c:/Users/Public/Documents/OC_game/Music/SE1.mp3'
+SOUND_EFFECT_TRANSITION2 = 'c:/Users/Public/Documents/OC_game/Music/SE2.mp3'
 
 # BGMの初期化
 bgm.initialize_bgm()
@@ -46,12 +46,12 @@ while True:
     score = stage1.get_score()
 
     stage2.initialize_game()
-    s2.stage2_scene(setting.cap , setting.window_name)
+    s2.stage2_scene(setting.cap , setting.window_name,score)
     stage2.game_loop(setting.cap, setting.window_name,score)
     score = stage2.get_score()
 
     stage3.initialize_game()
-    s3.stage3_scene(setting.cap , setting.window_name)
+    s3.stage3_scene(setting.cap , setting.window_name,score)
     stage3.game_loop(setting.cap, setting.window_name,score)
     
 

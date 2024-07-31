@@ -13,7 +13,7 @@ mp_pose = mp.solutions.pose
 
 # グローバル変数の定義
 game_duration = 30  # ゲームの長さ（秒）
-target_radius = 10  # 円の半径
+target_radius = 15  # 円の半径
 target_color_1 = (0, 0, 255)  # 赤
 target_color_2 = (255, 0, 0)  # 青
 golden_color = (0, 215, 255)  # 金
@@ -23,8 +23,8 @@ last_target_time = None  # ターゲット生成時間
 
 def initialize_game():
     global target_pos, rand, last_target_time
-    target_pos = (random.randint(target_radius, setting.width - target_radius), random.randint(target_radius, setting.height - target_radius))
     rand = random.randint(1, 5)
+    target_pos = (random.randint(target_radius+setting.width//4, 3*setting.width//4 - target_radius), random.randint(target_radius+setting.height//5, setting.height - target_radius))
     last_target_time = time.time()
 
 def get_score():
@@ -90,13 +90,13 @@ def game_loop(cap, window_name, s2_score):
 
             # 経過時間を描画
             elapsed_time = time.time() - start_time
-            cv2.putText(frame, f'Time: {int(game_duration - elapsed_time)}', (500, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'Time: {int(game_duration - elapsed_time)}', (setting.halfwidth+200, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
 
             # スコアを描画
             if elapsed_time <= game_duration / 2:
-                cv2.putText(frame, f'Score: {score}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                cv2.putText(frame, f'Score: {score}', (setting.halfwidth-400, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
             else:
-                cv2.putText(frame, 'Score: ???', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                cv2.putText(frame, 'Score: ???', (setting.halfwidth-400, 100), cv2.FONT_HERSHEY_SIMPLEX,3, (0, 0, 0), 3, cv2.LINE_AA)
 
             # ゲーム終了判定
             if elapsed_time > game_duration:

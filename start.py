@@ -46,7 +46,13 @@ def show_start_screen(cap, window_name):
                     break
 
             # タッチポイントを描画
-            cv2.rectangle(frame, (halfwidth - 20, halfheight + 20), (halfwidth + 20, halfheight + 60), (255, 255, 0))
+            cv2.rectangle(frame, (halfwidth - 20, halfheight + 20), (halfwidth + 20, halfheight + 60), (255, 255, 0),thickness=3)
+            
+            # タッチポイントが出てくる範囲
+            cv2.line(frame,(setting.width//4*3,setting.height//5),(setting.width//4*3,setting.height),(0,0,0),thickness = 5,lineType=cv2.LINE_AA)
+            cv2.line(frame,(setting.width//4,setting.height//5),(setting.width//4,setting.height),(0,0,0),thickness = 5,lineType=cv2.LINE_AA)
+            cv2.line(frame,(setting.width//4,setting.height//5),(setting.width//4*3,setting.height//5),(0,0,0),thickness = 5,lineType=cv2.LINE_AA)
+
 
             # textを表示
             cv2.putText(frame, 'Start', (halfwidth-80, halfheight), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 3, cv2.LINE_AA)

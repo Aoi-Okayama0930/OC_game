@@ -3,11 +3,8 @@ import time
 import numpy as np
 import setting
 
-halfwidth=setting.width//3
-halfheight=setting.height//2
 
-
-def stage2_scene(cap, window_name):
+def stage2_scene(cap, window_name,score):
     start_time = time.time()
     animation_duration = 3
 
@@ -27,8 +24,11 @@ def stage2_scene(cap, window_name):
         # アニメーションの内容を描画
         alpha = elapsed_time / animation_duration
         overlay = frame.copy()
-        cv2.putText(overlay, 'STAGE2', (halfwidth,halfheight), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10, cv2.LINE_AA)
+        cv2.putText(overlay, 'STAGE2', (setting.halfwidth-80,setting.halfheight), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10, cv2.LINE_AA)
         cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
+
+        # スコアを描画
+        cv2.putText(frame, f'Score: {score}', (setting.halfwidth-80, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
 
         cv2.imshow(window_name, frame)
         if cv2.waitKey(1) & 0xFF == 27:

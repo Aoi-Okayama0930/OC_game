@@ -3,8 +3,7 @@ import time
 import numpy as np
 import setting
 
-halfwidth=setting.width//3
-halfheight=setting.height//2
+
 
 
 def stage1_scene(cap, window_name):
@@ -27,7 +26,7 @@ def stage1_scene(cap, window_name):
         # アニメーションの内容を描画
         alpha = elapsed_time / animation_duration
         overlay = frame.copy()
-        cv2.putText(overlay, 'STAGE1', (halfwidth,halfheight), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10, cv2.LINE_AA)
+        cv2.putText(overlay, 'STAGE1', (setting.halfwidth-80,setting.halfheight), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 10, cv2.LINE_AA)
         cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
 
         cv2.imshow(window_name, frame)

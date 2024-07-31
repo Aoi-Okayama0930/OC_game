@@ -44,16 +44,16 @@ def display_score_screen(cap, window_name):
 
             # 画像を鏡像にし、スコアを描画
             frame = cv2.flip(frame, 1)
-            cv2.putText(frame, 'High Scores:', (100, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(frame, 'Your Scores:', (350, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(frame, f'{last_score}', (350, 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(frame, 'High Scores:', (halfwidth-400, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, 'Your Scores:', (halfwidth+200, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'{last_score}', (halfwidth+200, 110), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 2, cv2.LINE_AA)
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
             # 姿勢推定
             results = pose.process(rgb_frame)
 
             for i, score in enumerate(high_scores[:5], start=1):
-                cv2.putText(frame, f'{i}. {score}', (100, 50 + i * 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                cv2.putText(frame, f'{i}. {score}', (halfwidth-400, 50 + i * 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 2, cv2.LINE_AA)
 
             # 結果を描画
             if results.pose_landmarks:
@@ -79,10 +79,10 @@ def display_score_screen(cap, window_name):
                     return 'quit'  # 終了
 
             # タッチポイントを描画
-            cv2.rectangle(frame, (halfwidth - 150, halfheight + 100), (halfwidth - 110, halfheight + 140), (255, 255, 0))
+            cv2.rectangle(frame, (halfwidth - 150, halfheight + 100), (halfwidth - 110, halfheight + 140), (255, 255, 0),thickness=3)
 
             # タッチポイントを描画
-            cv2.rectangle(frame, (halfwidth + 110, halfheight + 100), (halfwidth + 150, halfheight + 140), (255, 255, 0))
+            cv2.rectangle(frame, (halfwidth + 110, halfheight + 100), (halfwidth + 150, halfheight + 140), (255, 255, 0),thickness=3)
 
             # textを表示
             cv2.putText(frame, 'ReStart', (halfwidth-230, halfheight+80), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 3, cv2.LINE_AA)

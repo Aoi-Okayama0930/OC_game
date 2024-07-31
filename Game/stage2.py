@@ -13,7 +13,7 @@ mp_pose = mp.solutions.pose
 
 # グローバル変数の定義
 game_duration = 20  # ゲームの長さ（秒）
-target_radius = 20  #　円の半径
+target_radius = 25  #　円の半径
 target_color_1 = (0, 0, 255)  # 赤
 target_color_2 = (255, 0, 0)  # 青
 target_pos = None
@@ -21,7 +21,7 @@ rand = random.randint(1, 2)  # 初期化
 
 def initialize_game():
     global target_pos
-    target_pos = (random.randint(target_radius, setting.width - target_radius), random.randint(target_radius, setting.height - target_radius))
+    target_pos = (random.randint(target_radius+setting.width//4, 3*setting.width//4 - target_radius), random.randint(target_radius+setting.height//5, setting.height - target_radius))
 
 def get_score():
     global score
@@ -63,7 +63,7 @@ def game_loop(cap, window_name,s1_score):
                 if (rand == 1 and np.linalg.norm(np.array(right_hand_pos) - np.array(target_pos)) < target_radius + setting.point_radius) or \
                    (rand == 2 and np.linalg.norm(np.array(left_hand_pos) - np.array(target_pos)) < target_radius + setting.point_radius):
                     score += 2
-                    target_pos = (random.randint(target_radius, setting.width - target_radius), random.randint(target_radius, setting.height - target_radius))
+                    target_pos = (random.randint(target_radius+setting.width//4, 3*setting.width//4 - target_radius), random.randint(target_radius+setting.height//5, setting.height - target_radius))
                     rand = random.randint(1, 2)  # 新しいターゲット位置が生成されるたびにランダムな値を再設定
 
             # タッチポイントを描画
@@ -74,10 +74,10 @@ def game_loop(cap, window_name,s1_score):
 
             # 経過時間を描画
             elapsed_time = time.time() - start_time
-            cv2.putText(frame, f'Time: {int(game_duration - elapsed_time)}', (500, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'Time: {int(game_duration - elapsed_time)}', (setting.halfwidth+200, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
 
             # スコアを描画
-            cv2.putText(frame, f'Score: {score}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(frame, f'Score: {score}', (setting.halfwidth-400, 100), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 3, cv2.LINE_AA)
 
             # ゲーム終了判定
             if elapsed_time > game_duration:

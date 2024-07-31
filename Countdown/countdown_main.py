@@ -5,7 +5,7 @@ import Countdown.countdown_start as cd_s
 import Countdown.space as space
 import Music.bgm as bgm
 
-SOUND_EFFECT_countdown = 'c:/Users/81908/Desktop/研究室/OpenCanpus/OC_game/Music/countdown.mp3'
+SOUND_EFFECT_countdown = 'c:/Users/Public/Documents/OC_game/Music/countdown.mp3'
 
 def countdown_main(cap, window_name):
     space.space(cap,window_name)
